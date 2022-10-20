@@ -71,7 +71,7 @@ class CartaDelDocenteClient
      */
     public function merchantActivation(): CartaDelDocenteResponse
     {
-        return $this->check('1','11aa22bb');
+        return $this->check('1', '11aa22bb');
     }
 
     /**
@@ -101,7 +101,6 @@ class CartaDelDocenteClient
     {
         try {
             return $this->getSoapClient()->$function($args);
-
         } catch (Exception $e) {
             throw new RequestException(
                 code: $e->detail ? $e->detail->FaultVoucher->exceptionCode : $e->faultcode,
@@ -109,5 +108,4 @@ class CartaDelDocenteClient
             );
         }
     }
-
 }
