@@ -8,29 +8,31 @@ use SoapClient;
 
 class CartaDelDocenteClient
 {
-    protected string $location;
+    protected SoapClient $client;
 
-    public function __construct(protected string $wsdlPath, protected string $certificatePath, protected string $certificatePassword, bool $production = true)
+    public function __construct(string $certificatePath, string $certificatePassword, bool $production = true)
     {
-        if ($production) {
-            $this->location = 'https://ws.cartadeldocente.istruzione.it/VerificaVoucherDocWEB/VerificaVoucher';
-        } else {
-            $this->location = 'https://wstest.cartadeldocente.istruzione.it/VerificaVoucherDocWEB/VerificaVoucher';
-        }
+        $this->client = $this->getSoapClient($certificatePath, $certificatePassword, $production);
     }
 
     /**
      * @return SoapClient
      * @throws \SoapFault
      */
-    public function getSoapClient()
+    private function getSoapClient(string $certificatePath, string $certificatePassword, bool $production)
     {
+        if ($production) {
+            $location = 'https://ws.cartadeldocente.istruzione.it/VerificaVoucherDocWEB/VerificaVoucher';
+        } else {
+            $location = 'https://wstest.cartadeldocente.istruzione.it/VerificaVoucherDocWEB/VerificaVoucher';
+        }
+
         return new SoapClient(
-            $this->wsdlPath,
+            __DIR__.'/Wsdl/VerificaVoucher.wsdl',
             [
-                'local_cert' => $this->certificatePath,
-                'location' => $this->location,
-                'passphrase' => $this->certificatePassword,
+                'local_cert' => $certificatePath,
+                'location' => $location,
+                'passphrase' => $certificatePassword,
                 'stream_context' => stream_context_create(
                     [
                         'http' => [
@@ -47,6 +49,11 @@ class CartaDelDocenteClient
         );
     }
 
+    public function client(): SoapClient
+    {
+        return $this->client;
+    }
+
     /**
      * @param string $operationType
      * @param string $voucher
@@ -55,7 +62,36 @@ class CartaDelDocenteClient
      */
     public function confirm(string $operationType, string $voucher, float $amount): bool
     {
-        $response = $this->request('Confirm', [$operationType, $voucher, $amount]);
+        $response = $this->request('Confirm', [
+            'checkReq' => [
+                'tipoOperazione' => $operationType,
+                'codiceVoucher' => $voucher,
+                'importo' => $amount,
+            ],
+        ]);
+
+        return new CartaDelDocenteResponse(
+            name: $response->checkResp->nominativoBeneficiario,
+            vatId: $response->checkResp->partitaIvaEsercente,
+            scope: $response->checkResp->ambito,
+            good: $response->checkResp->bene,
+            amount: floatval($response->checkResp->importo),
+        );
+    }
+
+    /**
+     * @param string $operationType
+     * @param string $voucher
+     * @return CartaDelDocenteResponse
+     */
+    public function check(string $operationType, string $voucher): CartaDelDocenteResponse
+    {
+        $response = $this->request('Check', [
+            'checkReq' => [
+                'tipoOperazione' => $operationType,
+                'codiceVoucher' => $voucher,
+            ],
+        ]);
 
         return new CartaDelDocenteResponse(
             name: $response->checkResp->nominativoBeneficiario,
@@ -71,37 +107,18 @@ class CartaDelDocenteClient
      */
     public function merchantActivation(): CartaDelDocenteResponse
     {
-        return $this->check('1','11aa22bb');
-    }
-
-    /**
-     * @param string $operationType
-     * @param string $voucher
-     * @return CartaDelDocenteResponse
-     */
-    public function check(string $operationType, string $voucher): CartaDelDocenteResponse
-    {
-        $response = $this->request('Check', [$operationType, $voucher]);
-
-        return new CartaDelDocenteResponse(
-            name: $response->checkResp->nominativoBeneficiario,
-            vatId: $response->checkResp->partitaIvaEsercente,
-            scope: $response->checkResp->ambito,
-            good: $response->checkResp->bene,
-            amount: floatval($response->checkResp->importo),
-        );
+        return $this->check('1', '11aa22bb');
     }
 
     /**
      * @param string $function
-     * @param ...$args
+     * @param array $options
      * @return object
      */
-    public function request(string $function, ...$args): object
+    public function request(string $function, array $options): object
     {
         try {
-            return $this->getSoapClient()->$function($args);
-
+            return $this->client()->$function($options);
         } catch (Exception $e) {
             throw new RequestException(
                 code: $e->detail ? $e->detail->FaultVoucher->exceptionCode : $e->faultcode,
@@ -109,5 +126,4 @@ class CartaDelDocenteClient
             );
         }
     }
-
 }
