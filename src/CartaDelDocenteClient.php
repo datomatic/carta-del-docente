@@ -14,8 +14,13 @@ class CartaDelDocenteClient
     /**
      * @throws SoapFault
      */
-    public function __construct(string $certificatePath, string $certificatePassword, bool $production = true)
+    public function __construct(string $certificatePath = '', string $certificatePassword = '', bool $production = true)
     {
+        if (! $production) {
+            $certificatePath = __DIR__.'/Resources/AAAAAA00H01H501P.pem';
+            $certificatePassword = 'm3D0T4aM';
+        }
+
         $this->client = $this->getSoapClient($certificatePath, $certificatePassword, $production);
     }
 
@@ -23,7 +28,7 @@ class CartaDelDocenteClient
      * @return SoapClient
      * @throws SoapFault
      */
-    private function getSoapClient(string $certificatePath, string $certificatePassword, bool $production): SoapClient
+    protected function getSoapClient(string $certificatePath, string $certificatePassword, bool $production): SoapClient
     {
         if ($production) {
             $location = 'https://ws.cartadeldocente.istruzione.it/VerificaVoucherDocWEB/VerificaVoucher';
@@ -32,7 +37,7 @@ class CartaDelDocenteClient
         }
 
         return new SoapClient(
-            __DIR__.'/Wsdl/VerificaVoucher.wsdl',
+            __DIR__.'/Resources/VerificaVoucher.wsdl',
             [
                 'local_cert' => $certificatePath,
                 'location' => $location,
@@ -113,7 +118,7 @@ class CartaDelDocenteClient
      * @param array $options
      * @return object
      */
-    public function request(string $function, array $options): object
+    protected function request(string $function, array $options): object
     {
         try {
             return $this->client()->$function($options);
