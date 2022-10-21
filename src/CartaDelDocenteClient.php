@@ -5,11 +5,15 @@ namespace Datomatic\CartaDelDocente;
 use Datomatic\CartaDelDocente\Exceptions\RequestException;
 use Exception;
 use SoapClient;
+use SoapFault;
 
 class CartaDelDocenteClient
 {
     protected SoapClient $client;
 
+    /**
+     * @throws SoapFault
+     */
     public function __construct(string $certificatePath, string $certificatePassword, bool $production = true)
     {
         $this->client = $this->getSoapClient($certificatePath, $certificatePassword, $production);
@@ -17,9 +21,9 @@ class CartaDelDocenteClient
 
     /**
      * @return SoapClient
-     * @throws \SoapFault
+     * @throws SoapFault
      */
-    private function getSoapClient(string $certificatePath, string $certificatePassword, bool $production)
+    private function getSoapClient(string $certificatePath, string $certificatePassword, bool $production): SoapClient
     {
         if ($production) {
             $location = 'https://ws.cartadeldocente.istruzione.it/VerificaVoucherDocWEB/VerificaVoucher';
@@ -70,13 +74,7 @@ class CartaDelDocenteClient
             ],
         ]);
 
-        return new CartaDelDocenteResponse(
-            name: $response->checkResp->nominativoBeneficiario,
-            vatId: $response->checkResp->partitaIvaEsercente,
-            scope: $response->checkResp->ambito,
-            good: $response->checkResp->bene,
-            amount: floatval($response->checkResp->importo),
-        );
+        return $response->checkResp->esito === "OK";
     }
 
     /**
