@@ -70,7 +70,7 @@ $result->amount // importo totale del buono
 
 ### Confirm
 
-Per effettuare il Confirm del voucher basta chiamare la funzione `confirm` passando il tipo di operazione (1,2,3), il codice del voucher e l'importo da confermare.
+Per effettuare il Confirm del voucher basta chiamare la funzione `confirm` passando il tipo di operazione (1), il codice del voucher e l'importo da confermare.
 
 ```php
 $result = $client->confirm(1, 'Codice Voucher', 52.50);
