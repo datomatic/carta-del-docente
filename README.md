@@ -12,7 +12,7 @@ Se utilizzate il framework Laravel ho creato anche un pacchetto ad hoc [datomati
 ## Requisiti
 - PHP >= 8.0
 - ext-soap
-- 
+
 ## Installazione
 
 Puoi installare il pacchetto via composer:
