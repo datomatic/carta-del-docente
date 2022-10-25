@@ -7,6 +7,7 @@
 
 Il pacchetto non ufficiale per integrare facilmente la Carta del Docente in un progetto PHP.
 
+Se utilizzate il framework Laravel ho creato anche un pacchetto ad hoc [datomatic/laravel-carta-del-docente](https://github.com/datomatic/laravel-carta-del-docente).
 
 ## Requisiti
 - PHP >= 8.0
