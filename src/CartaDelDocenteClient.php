@@ -14,29 +14,30 @@ class CartaDelDocenteClient
     /**
      * @throws SoapFault
      */
-    public function __construct(string $certificatePath = '', string $certificatePassword = '', bool $production = true)
+    public function __construct(string $certificatePath = '', string $certificatePassword = '')
     {
-        if (! $production) {
-            $certificatePath = __DIR__.'/Resources/AAAAAA00H01H501P.pem';
-            $certificatePassword = 'm3D0T4aM';
-        }
-
-        $this->client = $this->getSoapClient($certificatePath, $certificatePassword, $production);
+        $this->setSoapClient($certificatePath, $certificatePassword);
     }
 
     /**
-     * @return SoapClient
+     * @param string $certificatePath
+     * @param string $certificatePassword
+     * @return void
      * @throws SoapFault
      */
-    protected function getSoapClient(string $certificatePath, string $certificatePassword, bool $production): SoapClient
+    protected function setSoapClient(string $certificatePath, string $certificatePassword): void
     {
+        $production = !empty($certificatePath) && !empty($certificatePassword);
+
         if ($production) {
             $location = 'https://ws.cartadeldocente.istruzione.it/VerificaVoucherDocWEB/VerificaVoucher';
         } else {
             $location = 'https://wstest.cartadeldocente.istruzione.it/VerificaVoucherDocWEB/VerificaVoucher';
+            $certificatePath = __DIR__.'/Resources/AAAAAA00H01H501P.pem';
+            $certificatePassword = 'm3D0T4aM';
         }
 
-        return new SoapClient(
+        $this->client = new SoapClient(
             __DIR__.'/Resources/VerificaVoucher.wsdl',
             [
                 'local_cert' => $certificatePath,
@@ -58,29 +59,12 @@ class CartaDelDocenteClient
         );
     }
 
+
     public function client(): SoapClient
     {
         return $this->client;
     }
 
-    /**
-     * @param string $operationType
-     * @param string $voucher
-     * @param float $amount
-     * @return bool
-     */
-    public function confirm(string $operationType, string $voucher, float $amount): bool
-    {
-        $response = $this->request('Confirm', [
-            'checkReq' => [
-                'tipoOperazione' => $operationType,
-                'codiceVoucher' => $voucher,
-                'importo' => $amount,
-            ],
-        ]);
-
-        return $response->checkResp->esito === "OK";
-    }
 
     /**
      * @param string $operationType
@@ -112,6 +96,27 @@ class CartaDelDocenteClient
     {
         return $this->check('1', '11aa22bb');
     }
+
+
+    /**
+     * @param string $operationType
+     * @param string $voucher
+     * @param float $amount
+     * @return bool
+     */
+    public function confirm(string $operationType, string $voucher, float $amount): bool
+    {
+        $response = $this->request('Confirm', [
+            'checkReq' => [
+                'tipoOperazione' => $operationType,
+                'codiceVoucher' => $voucher,
+                'importo' => $amount,
+            ],
+        ]);
+
+        return $response->checkResp->esito === "OK";
+    }
+
 
     /**
      * @param string $function
