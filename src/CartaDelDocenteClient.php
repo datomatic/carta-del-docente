@@ -65,15 +65,15 @@ class CartaDelDocenteClient
     }
 
     /**
-     * @param string $operationType
+     * @param string|int $operationType
      * @param string $voucher
      * @return CartaDelDocenteResponse
      */
-    public function check(string $operationType, string $voucher): CartaDelDocenteResponse
+    public function check(string|int $operationType, string $voucher): CartaDelDocenteResponse
     {
         $response = $this->request('Check', [
             'checkReq' => [
-                'tipoOperazione' => $operationType,
+                'tipoOperazione' => strval($operationType),
                 'codiceVoucher' => $voucher,
             ],
         ]);
@@ -96,16 +96,16 @@ class CartaDelDocenteClient
     }
 
     /**
-     * @param string $operationType
+     * @param string|int $operationType
      * @param string $voucher
      * @param float $amount
      * @return bool
      */
-    public function confirm(string $operationType, string $voucher, float $amount): bool
+    public function confirm(string|int $operationType, string $voucher, float $amount): bool
     {
         $response = $this->request('Confirm', [
             'checkReq' => [
-                'tipoOperazione' => $operationType,
+                'tipoOperazione' => strval($operationType),
                 'codiceVoucher' => $voucher,
                 'importo' => $amount,
             ],
