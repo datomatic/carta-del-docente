@@ -50,10 +50,10 @@ Una volta ottenuto il client è possibile utilizzare le poche funzionalità nece
 
 ### Check
 
-Per effettuare il Check del voucher basta chiamare la funzione `check` passando il tipo di operazione ('1','2','3') e il codice del voucher.
+Per effettuare il Check del voucher basta chiamare la funzione `check` passando il tipo di operazione (1,2,3) e il codice del voucher.
 
 ```php
-$result = $client->check('1', 'voucher');
+$result = $client->check(1, 'voucher');
 ```
 
 La funzione ritorna un oggetto `CartaDelDocenteResponse` in caso di esito positivo oppure una eccezione `RequestException` in caso di errore.
@@ -70,10 +70,10 @@ $result->amount // importo totale del buono
 
 ### Confirm
 
-Per effettuare il Confirm del voucher basta chiamare la funzione `confirm` passando il tipo di operazione ('1','2','3'), il codice del voucher e l'importo da confermare.
+Per effettuare il Confirm del voucher basta chiamare la funzione `confirm` passando il tipo di operazione (1,2,3), il codice del voucher e l'importo da confermare.
 
 ```php
-$result = $client->confirm('1', 'Codice Voucher', 52.50);
+$result = $client->confirm(1, 'Codice Voucher', 52.50);
 ```
 
 
