@@ -21,7 +21,7 @@ Puoi installare il pacchetto via composer:
 composer require datomatic/carta-del-docente
 ```
 
-## Predisposizione
+## Configurazione
 
 Per poter utilizzare il pacchetto bisogna leggere la [documentazione ufficiale](https://www.cartadeldocente.istruzione.it/static/Linee%20Guida%20Esercenti.pdf) che spiega tutto il processo della Carta del Docente.
 
