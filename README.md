@@ -23,7 +23,7 @@ composer require datomatic/carta-del-docente
 
 ## Predisposizione
 
-Per poter utilizzare il pacchetto bisogna leggere la [documentazione ufficiale](https://www.cartadeldocente.istruzione.it/static/Domande%20frequenti%20docenti.pdf) che spiega tutto il processo della Carta del Docente.
+Per poter utilizzare il pacchetto bisogna leggere la [documentazione ufficiale](https://www.cartadeldocente.istruzione.it/static/Linee%20Guida%20Esercenti.pdf) che spiega tutto il processo della Carta del Docente.
 
 Per la parte di test è già tutto pronto senza dover generare nessun certificato (l'ho già fatto io per voi); basta solo richiedere dei voucher di test tramite email a [docenti@sogei.it](mailto:docenti@sogei.it).
 
