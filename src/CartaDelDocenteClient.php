@@ -27,7 +27,7 @@ class CartaDelDocenteClient
      */
     protected function setSoapClient(string $certificatePath, string $certificatePassword): void
     {
-        $production = !empty($certificatePath) && !empty($certificatePassword);
+        $production = ! empty($certificatePath) && ! empty($certificatePassword);
 
         if ($production) {
             $location = 'https://ws.cartadeldocente.istruzione.it/VerificaVoucherDocWEB/VerificaVoucher';
@@ -59,12 +59,10 @@ class CartaDelDocenteClient
         );
     }
 
-
     public function client(): SoapClient
     {
         return $this->client;
     }
-
 
     /**
      * @param string $operationType
@@ -97,7 +95,6 @@ class CartaDelDocenteClient
         return $this->check('1', '11aa22bb');
     }
 
-
     /**
      * @param string $operationType
      * @param string $voucher
@@ -116,7 +113,6 @@ class CartaDelDocenteClient
 
         return $response->checkResp->esito === "OK";
     }
-
 
     /**
      * @param string $function
