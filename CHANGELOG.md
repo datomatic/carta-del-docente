@@ -2,6 +2,10 @@
 
 All notable changes to `carta-del-docente` will be documented in this file.
 
+## v.1.1.1 - 2022-10-25
+
+- accept int value as $operationType
+
 ## v1.1.0 - 2022-10-25
 
 - code refactoring
