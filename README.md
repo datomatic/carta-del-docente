@@ -1,5 +1,5 @@
 ![Enum Helper-Dark](branding/dark.png#gh-dark-mode-only)![Enum Helper-Light](branding/light.png#gh-light-mode-only)
-# Un pacchetto per poter integrare la Carta del Docente in un progetto PHP
+# CARTA del DOCENTE
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/datomatic/carta-del-docente.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/carta-del-docente)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/datomatic/carta-del-docente/Check%20%26%20fix%20styling?label=code%20style&color=5FE8B3&style=for-the-badge)](https://github.com/datomatic/laravel-enum-collections/actions/workflows/fix-php-code-style-issues.yml)
