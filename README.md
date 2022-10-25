@@ -12,7 +12,7 @@ Il pacchetto non ufficiale per integrare facilmente la Carta del Docente in un p
 - PHP >= 8.0
 - ext-soap
 - 
-## Installatione
+## Installazione
 
 Puoi installare il pacchetto via composer:
 
@@ -42,7 +42,7 @@ Per l'ambiente di produzione è necessario fornire il path al certificato (possi
 
 ```php
 //Produzione
-$client = new Datomatic\CartaDelDocente\CartaDelDocenteClient('../path/certificate.pem', 'passworCertificato');
+$client = new Datomatic\CartaDelDocente\CartaDelDocenteClient('../path/certificate.pem', 'passwordCertificato');
 ```
 
 Una volta ottenuto il client è possibile utilizzare le poche funzionalità necessarie.
@@ -133,7 +133,7 @@ Poi lo convertiamo in un file .p12 combinandolo con la chiave generata nel primo
 openssl pkcs12 -export -inkey key.der -in XXXXX.pem  -out XXXXX.p12
 ```
 
-Ed infine convertiamo il certificato .p12 nel certificato `result.pem` finale da usare in produzione
+Infine convertiamo il certificato .p12 nel certificato `result.pem` finale da usare in produzione
 
 ```bash
 openssl pkcs12 -in 02017240249.p12 -out result.pem -clcerts
