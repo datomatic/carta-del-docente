@@ -2,7 +2,7 @@
 # CARTA del DOCENTE
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/datomatic/carta-del-docente.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/carta-del-docente)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/datomatic/carta-del-docente/Check%20%26%20fix%20styling?label=code%20style&color=5FE8B3&style=for-the-badge)](https://github.com/datomatic/laravel-enum-collections/actions/workflows/fix-php-code-style-issues.yml)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/datomatic/carta-del-docente/fix-php-code-style-issues.yml?label=code%20style&color=5FE8B3&style=for-the-badge)](https://github.com/datomatic/laravel-enum-collections/actions/workflows/fix-php-code-style-issues.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/datomatic/carta-del-docente.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/carta-del-docente)
 
 Il pacchetto non ufficiale per integrare facilmente la Carta del Docente in un progetto PHP.
