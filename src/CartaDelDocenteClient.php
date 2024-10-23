@@ -40,6 +40,7 @@ class CartaDelDocenteClient
         $this->client = new SoapClient(
             __DIR__.'/Resources/VerificaVoucher.wsdl',
             [
+                'cache_wsdl' => WSDL_CACHE_NONE,
                 'local_cert' => $certificatePath,
                 'location' => $location,
                 'passphrase' => $certificatePassword,
