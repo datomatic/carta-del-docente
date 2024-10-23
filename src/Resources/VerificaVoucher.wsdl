@@ -85,7 +85,7 @@
   <wsdl:binding name="VerificaVoucherSOAP" type="tns:VerificaVoucher">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="Check">
-      <soap:operation soapAction="http://bonus.miur.it/VerificaVoucher/Check"/>
+      <soap:operation soapAction="http://bonus.miur.it/VerificaVoucherSOAP/Check"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
@@ -94,7 +94,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Confirm">
-      <soap:operation soapAction="http://bonus.miur.it/VerificaVoucher/Confirm"/>
+      <soap:operation soapAction="http://bonus.miur.it/VerificaVoucherSOAP/Confirm"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
