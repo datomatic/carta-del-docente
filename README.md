@@ -2,7 +2,7 @@
 # CARTA del DOCENTE
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/datomatic/carta-del-docente.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/carta-del-docente)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/datomatic/carta-del-docente/Check%20%26%20fix%20styling?label=code%20style&color=5FE8B3&style=for-the-badge)](https://github.com/datomatic/laravel-enum-collections/actions/workflows/fix-php-code-style-issues.yml)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/datomatic/carta-del-docente/php-cs-fixer.yml?label=code%20style&color=5FE8B3&style=for-the-badge)](https://github.com/datomatic/carta-del-docente/actions/workflows/php-cs-fixer.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/datomatic/carta-del-docente.svg?style=for-the-badge)](https://packagist.org/packages/datomatic/carta-del-docente)
 
 Il pacchetto non ufficiale per integrare facilmente la Carta del Docente in un progetto PHP.
@@ -23,7 +23,7 @@ composer require datomatic/carta-del-docente
 
 ## Configurazione
 
-Per poter utilizzare il pacchetto bisogna leggere la [documentazione ufficiale](https://www.cartadeldocente.istruzione.it/static/Linee%20Guida%20Esercenti.pdf) che spiega tutto il processo della Carta del Docente.
+Per poter utilizzare il pacchetto bisogna leggere la [documentazione ufficiale](https://test-carta-docente.readthedocs.io/it/latest/linee-guida-esercenti.html) che spiega tutto il processo della Carta del Docente.
 
 Per la parte di test è già tutto pronto senza dover generare nessun certificato (l'ho già fatto io per voi); basta solo richiedere dei voucher di test tramite email a [docenti@sogei.it](mailto:docenti@sogei.it).
 
