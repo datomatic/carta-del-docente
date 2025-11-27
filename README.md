@@ -103,7 +103,9 @@ Per generare correttamente un certificato è necessario eseguire delle operazion
 
 NB:Se ottenete un errore di comando non valido potrebbe essere necessario scrivere a mano il comando intero invece che fare copia incolla.
 
-Per prima cosa dobbiamo andare a creare la richiesta di certificato da usare sul sito [cartadeldocente](https://www.cartadeldocente.istruzione.it/CommercianteWeb/#/login).
+Per prima cosa dobbiamo andare a creare la richiesta di certificato da usare sul sito [cartadeldocente](https://www.cartadeldocente.istruzione.it/docentiEsercente/#/login).
+
+Per fare questo prima creiamo il file req.cer da caricare nel sito:
 
 ```bash
 openssl req -newkey rsa:2048 -keyout key.der -out req.der -outform DER
@@ -120,9 +122,9 @@ Una volta premuto invio dovremmo per prima cosa inserire una password (PEM pass)
 - Email Address []: // indirizzo email
 - A challenge password []: // una nuova password che per comodità metteremo uguale a quella già inserita
 
-Ottenuto il file req.der lo possiamo caricare sul sito [cartadeldocente](https://www.cartadeldocente.istruzione.it/CommercianteWeb/#/login) nella form di richiesta certificato ed dopo qualche secondo/minuto possiamo scaricare il file `PIVA.cer` che andremmo a mettere nella stessa cartella dove abbiamo gli altri file sopra creati.
+Ottenuto il file req.der lo possiamo caricare sul sito [cartadeldocente](https://www.cartadeldocente.istruzione.it/CommercianteWeb/#/login) nella form di richiesta certificato ed dopo qualche secondo/minuto possiamo scaricare il file `[PIVA-azienda].cer` che andremmo a mettere nella stessa cartella dove abbiamo gli altri file sopra creati.
 
-Dopo aver avuto il file .der lo andiamo a convertire in .pem (i files per comodità li chiamo XXXXX ma voi avrete il numero di partita iva).
+Dopo aver avuto il file .cer lo andiamo a convertire in .pem (i files per comodità li chiamo XXXXX ma voi avrete il numero di partita iva).
 
 ```bash
 openssl x509 -inform DER -in XXXXX.cer -out XXXXX.pem
@@ -141,6 +143,9 @@ openssl pkcs12 -in 02017240249.p12 -out result.pem -clcerts
 ```
 
 Quindi per usare il pacchetto in produzione bisognerà mettere il path al file `result.pem`.
+
+
+###N.B.: ricordatevi che il certificato ha valenza 3 anni e quindi andrà rigenerato ogni 3 anni
 
 ## Testing
 
