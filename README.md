@@ -27,7 +27,7 @@ Per poter utilizzare il pacchetto bisogna leggere la [documentazione ufficiale](
 
 Per la parte di test è già tutto pronto senza dover generare nessun certificato (l'ho già fatto io per voi); basta solo richiedere dei voucher di test tramite email a [docenti@sogei.it](mailto:docenti@sogei.it).
 
-Per la parte di produzione, invece, va generato un certificato seguendo la [guida](#come-generare-un-certificato-valido). 
+Attenzione: Per la parte di produzione, invece, va generato un certificato seguendo la [guida](#come-generare-un-certificato-valido). 
 
 ## Utilizzo
 
@@ -47,6 +47,27 @@ $client = new Datomatic\CartaDelDocente\CartaDelDocenteClient('../path/certifica
 ```
 
 Una volta ottenuto il client è possibile utilizzare le poche funzionalità necessarie.
+
+
+### Attivazione esercente
+
+Questa operazione va fatta solo una volta all'inizio ed è disponibile solo per la produzione in quanto in ambiente di test non è necessaria.
+
+```php
+$client->merchantActivation();
+```
+La funzione ritorna un oggetto `CartaDelDocenteResponse` oppure una eccezione `RequestException` in caso di errore.
+Se tutto è andato a buon fine verrà ritornato il seguente oggetto:
+
+```php
+Datomatic\CartaDelDocente\CartaDelDocenteResponse {
+  +name: "Attivazione effettuata"
+  +vatId: "12345678901" // p.IVA esercente attivato
+  +scope: "-"
+  +good: "-"
+  +amount: 0
+}
+```
 
 ### Check
 
@@ -77,25 +98,6 @@ $result = $client->confirm(1, 'Codice Voucher', 52.50);
 ```
 
 
-### Attivazione esercente
-
-Questa operazione va fatta solo una volta all'inizio ed è disponibile solo per la produzione in quanto in ambiente di test non è necessaria.
-
-```php
-$client->merchantActivation();
-```
-La funzione ritorna un oggetto `CartaDelDocenteResponse` oppure una eccezione `RequestException` in caso di errore.
-Se tutto è andato a buon fine verrà ritornato il seguente oggetto:
-
-```php
-Datomatic\CartaDelDocente\CartaDelDocenteResponse {
-  +name: "Attivazione effettuata"
-  +vatId: "12345678901" // p.IVA esercente attivato
-  +scope: "-"
-  +good: "-"
-  +amount: 0
-}
-```
 
 ## Come generare un certificato valido
 
@@ -144,12 +146,19 @@ openssl pkcs12 -in 02017240249.p12 -out result.pem -clcerts
 
 Quindi per usare il pacchetto in produzione bisognerà mettere il path al file `result.pem`.
 
+N.B.: ricordatevi che il certificato ha valenza 3 anni e quindi andrà rigenerato ogni 3 anni
 
-### N.B.: ricordatevi che il certificato ha valenza 3 anni e quindi andrà rigenerato ogni 3 anni
+### Cosa fare in caso di scadenza certificato
+
+Quando ricevete l'errore `Could not connect to host` ci sono due possibilità o è offline il servizio di Sogei oppure avete il certificato scaduto.
+
 Per vedere la scadenza del certificato eseguite il seguente comando:
 ```bash
 openssl x509 -enddate -noout -in result.pem
 ```
+
+Per rigenerarlo seguite la procedura qui per [creare un nuovo certificato](#come-generare-un-certificato-valido) e successivamente ricordatevi di attivarlo con [questo metodo](#attivazione-esercente).
+
 
 ## Testing
 
