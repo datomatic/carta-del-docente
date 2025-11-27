@@ -145,7 +145,11 @@ openssl pkcs12 -in 02017240249.p12 -out result.pem -clcerts
 Quindi per usare il pacchetto in produzione bisognerà mettere il path al file `result.pem`.
 
 
-###N.B.: ricordatevi che il certificato ha valenza 3 anni e quindi andrà rigenerato ogni 3 anni
+### N.B.: ricordatevi che il certificato ha valenza 3 anni e quindi andrà rigenerato ogni 3 anni
+Per vedere la scadenza del certificato eseguite il seguente comando:
+```bash
+openssl x509 -enddate -noout -in result.pem
+```
 
 ## Testing
 
