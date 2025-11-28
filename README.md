@@ -124,9 +124,10 @@ Una volta premuto invio dovremmo per prima cosa inserire una password (PEM pass)
 - Email Address []: // indirizzo email
 - A challenge password []: // una nuova password che per comodità metteremo uguale a quella già inserita
 
-Ottenuto il file req.der lo possiamo caricare sul sito [cartadeldocente](https://www.cartadeldocente.istruzione.it/CommercianteWeb/#/login) nella form di richiesta certificato ed dopo qualche secondo/minuto possiamo scaricare il file `[PIVA-azienda].cer` che andremmo a mettere nella stessa cartella dove abbiamo gli altri file sopra creati.
+Ottenuto il file req.der lo possiamo caricare sul sito [cartadeldocente](https://www.cartadeldocente.istruzione.it/CommercianteWeb/#/login) nella form di richiesta certificato ed dopo qualche secondo/minuto possiamo scaricare il file `[PIVA-azienda].cer` sempre dal sito online (comparirà un pulsante con scritto qualcosa tipo 'scarica certificato' dove prima c'era il pulsante per richiedere il certificato).
+Questo certificato lo mettiamo nella stessa cartella dove abbiamo gli altri file sopra creati.
 
-Dopo aver avuto il file .cer lo andiamo a convertire in .pem (i files per comodità li chiamo XXXXX ma voi avrete il numero di partita iva).
+Andiamo a convertire il certificato .cer in un file .pem (i files per comodità li chiamo XXXXX ma voi avrete il numero della partita iva aziendale).
 
 ```bash
 openssl x509 -inform DER -in XXXXX.cer -out XXXXX.pem
