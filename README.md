@@ -141,7 +141,7 @@ openssl pkcs12 -export -inkey key.der -in XXXXX.pem  -out XXXXX.p12
 Infine convertiamo il certificato .p12 nel certificato `result.pem` finale da usare in produzione
 
 ```bash
-openssl pkcs12 -in 02017240249.p12 -out result.pem -clcerts
+openssl pkcs12 -in XXXXX.p12 -out result.pem -clcerts
 ```
 
 Quindi per usare il pacchetto in produzione bisognerà mettere il path al file `result.pem`.
