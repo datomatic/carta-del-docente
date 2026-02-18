@@ -8,8 +8,4 @@ use RuntimeException;
 
 class RequestException extends RuntimeException
 {
-    public function __construct(string $code, string $message)
-    {
-        parent::__construct($message, $code);
-    }
 }
