@@ -2,6 +2,10 @@
 
 All notable changes to `carta-del-docente` will be documented in this file.
 
+## v1.3.0 - 2026-02-18
+
+- Update the RequestException message
+
 ## v1.2.1 - 2024-10-23
 
 - add cache none param
