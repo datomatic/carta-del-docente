@@ -5,6 +5,9 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    env:
+      # Composer 2.9 blocks old releases with advisories, which breaks prefer-lowest/legacy jobs
+      COMPOSER_NO_SECURITY_BLOCKING: 1
     strategy:
       fail-fast: true
       matrix:
